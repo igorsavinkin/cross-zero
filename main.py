@@ -1,5 +1,6 @@
 import check, random
 import numpy as np
+from output_arr import output
 #from random import randint
 
 def philip_robot(a, mark):
@@ -23,18 +24,9 @@ def mark_robot(a, mark):
     else:
         pass
     return a   
-def output_array(a):
-    pass
 
-    
-#a = np.array([[None, None, None],
-#              [None, None, None],
-#              [None, None, None]])
-#a = np.array([[None, None, None],
-#              [None, None, None],
-#              [None, None, None]])
 a = np.full([3, 3], "*", dtype=np.object)
-print(a)
+#output(a)
 start = input('Who starts? (f/m)')
 
 if start.lower() == 'm':
@@ -44,7 +36,7 @@ if start.lower() == 'm':
 else:
     mark_mark=0
     philip_mark=1
-print(a)
+output(a)
 print('Филипп ставит:', philip_mark )
 print('Марк ставит:', mark_mark )
 print('===============================')
@@ -61,7 +53,8 @@ for x in range(10):
     if winner != None:
         print ('winner:', winner)
         break
-    print(a)
+    output(a)
     print('===============================')
-print('Final array:\n', a)
+print('Final array:')
+output(a)
 #print ('winner:', check.check_if_solved(a))
