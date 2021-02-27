@@ -6,13 +6,22 @@ from output_arr import output
 def philip_robot(a, mark):
     
     opposite_mark = abs(mark - 1)
-    for s in range(len(a)):
-        for f in range(len(a[s])):
-            if a[s,f] == mark:
-                print('At row', s ,'and column ', f , 'there is mark:', mark)
-            elif a[s,f] == opposite_mark:
-                print('At row', s ,'and column ', f , 'there is opposite mark:', opposite_mark)
-                
+##    for s in range(len(a)):
+##        for f in range(len(a[s])):
+##            if a[s,f] == mark:
+##                print('At row', s ,'and column ', f , 'there is mark:', mark)
+##            elif a[s,f] == opposite_mark:
+##                print('At row', s ,'and column ', f , 'there is opposite mark:', opposite_mark) m 
+    for b in a:
+        rowCouter = 0
+        for elem in b:
+            if elem == mark:
+                rowCouter += 1
+        for i in range(len(b)):
+            if rowCouter == 2 and b[i] =="*":
+                b[i] = mark
+                print ('Philip played smart move ')
+                return a
 
     c = random.randint(0,2)
     d = random.randint(0,2)
@@ -21,19 +30,33 @@ def philip_robot(a, mark):
         d = random.randint(0,2)
 
     a[c, d] = mark
-    print('Philip played [' ,c,  ',', d, ']')
+    print('Philip plays random [' ,c,  ',', d, ']')
     
     return a
         
 def mark_robot(a, mark):
     opposite_mark = abs(mark - 1)
+    
     for i in range(len(a)):
-        for j in range(len(a[i])):
-            if a[i,j] == mark:
-                print('At row', i ,'and column ', j , 'there is mark:', mark)
-            elif a[i,j] == opposite_mark:
-                print('At row', i ,'and column ', j , 'there is opposite mark:', opposite_mark)
-                
+        b = a[i]
+        rowCounter = 0 
+        for j in range(len(b)):
+            if b[j]==mark:
+                 rowCounter += 1 
+        for j in range(len(b)):
+            if rowCounter == 2 and b[j] == "*": 
+                b[j] = mark
+                print('Mark plays smart move: [', i, ', ', j, ']')
+                return a
+          
+    
+##    for i in range(len(a)):
+##        for j in range(len(a[i])):
+##            if a[i,j] == mark:
+##                print('At row', i ,'and column ', j , 'there is mark:', mark)
+##            elif a[i,j] == opposite_mark:
+##                print('At row', i ,'and column ', j , 'there is opposite mark:', opposite_mark)
+               
 
     x = random.randint(0,2)
     y = random.randint(0,2)                
@@ -42,12 +65,16 @@ def mark_robot(a, mark):
         y = random.randint(0,2)
  
     a[x, y] = mark
-    print('Mark played [', x, ',', y, ']')
+    print('Mark plays random [', x, ',', y, ']')
  
     return a   
 
 a = np.full([3, 3], "*", dtype=np.object)
 #output(a)
+
+print ("================================================")
+print ("Initial array:")
+output(a) 
 start = input('Who starts? (f/m)')
 
 if start.lower() == 'm':
@@ -57,7 +84,9 @@ if start.lower() == 'm':
 else:
     mark_mark=0
     philip_mark=1
-output(a)
+#a[0,0]= mark
+output(a) 
+
 print('Филипп ставит:', philip_mark )
 print('Марк ставит:', mark_mark )
 print('===============================')
@@ -72,7 +101,7 @@ for x in range(100):
     a = mark_robot(a, mark_mark)
     winner = check.check_if_solved(a)
     if winner != None:
-        print ('winner:', winner)
+        print ('The winner:', winner)
         break
     output(a)
     print('===============================')
