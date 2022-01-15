@@ -75,7 +75,7 @@ a = np.full([3, 3], "*", dtype=np.object)
 print ("================================================")
 print ("Initial array:")
 output(a) 
-start = input('Who starts? (f/m)')
+start = input('Who starts? PHILIP or MARK: (p/m)')
 
 if start.lower() == 'm':
     mark_mark=1 # отметка Марка
