@@ -30,7 +30,7 @@ def philip_robot(a, mark):
     # a[:, i] - i-й столбец.
     for i in range(a.shape[1]):
         #print('столбец:', i, ': ' , a[:, i])
-        # a[:, i]
+        # a[:, i] 
         columnCouter = 0
         for elem in a[:, i]:
             if elem == mark:
