@@ -11,8 +11,10 @@ def philip_robot(a, mark):
 ##            if a[s,f] == mark:
 ##                print('At row', s ,'and column ', f , 'there is mark:', mark)
 ##            elif a[s,f] == opposite_mark:
-##                print('At row', s ,'and column ', f , 'there is opposite mark:', opposite_mark) m 
+##                print('At row', s ,'and column ', f , 'there is opposite mark:', opposite_mark) m
+    # smart move check for horisontal move/win 
     for b in a:
+        #print ('B: ', b)
         rowCouter = 0
         for elem in b:
             if elem == mark:
@@ -20,9 +22,28 @@ def philip_robot(a, mark):
         for i in range(len(b)):
             if rowCouter == 2 and b[i] =="*":
                 b[i] = mark
-                print ('Philip played smart move ')
+                print ('Philip played smart move for row')
                 return a
+            
+    #  smart move check for vertical move/winp
+    # a[:,0] - 1-й столбец.
+    # a[:, i] - i-й столбец.
+    for i in range(a.shape[1]):
+        #print('столбец:', i, ': ' , a[:, i])
+        # a[:, i]
+        columnCouter = 0
+        for elem in a[:, i]:
+            if elem == mark:
+                columnCouter += 1
+        for j in range(a.shape[0]):
+            if columnCouter == 2 and a[j][i] =="*":
+                a[j][i] = mark
+                print ('Philip played smart move for column')
+                return a
+ 
+            
 
+    # random move
     c = random.randint(0,2)
     d = random.randint(0,2)
     while a[c, d] != '*':
