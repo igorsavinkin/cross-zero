@@ -57,7 +57,8 @@ def philip_robot(a, mark):
         
 def mark_robot(a, mark):
     opposite_mark = abs(mark - 1)
-    
+
+    # smart move check for horisontal move
     for i in range(len(a)):
         b = a[i]
         rowCounter = 0 
@@ -67,7 +68,23 @@ def mark_robot(a, mark):
         for j in range(len(b)):
             if rowCounter == 2 and b[j] == "*": 
                 b[j] = mark
-                print('Mark plays smart move: [', i, ', ', j, ']')
+                print('Mark plays smart move for row: [', i, ', ', j, ']')
+                return a
+
+        #  smart move check for vertical move/winp
+    # a[:,0] - 1-й столбец.
+    # a[:, i] - i-й столбец.
+    for i in range(a.shape[1]):
+        #print('столбец:', i, ': ' , a[:, i])
+        # a[:, i] 
+        columnCouter = 0
+        for elem in a[:, i]:
+            if elem == mark:
+                columnCouter += 1
+        for j in range(a.shape[0]):
+            if columnCouter == 2 and a[j][i] =="*":
+                a[j][i] = mark
+                print ('Mark played smart move for column')
                 return a
           
     
@@ -78,8 +95,8 @@ def mark_robot(a, mark):
 ##            elif a[i,j] == opposite_mark:
 ##                print('At row', i ,'and column ', j , 'there is opposite mark:', opposite_mark)
                
-
-    x = random.randint(0,2)
+    # random move
+    x = random.randint(0,2) # int - integer - целое
     y = random.randint(0,2)                
     while a[x, y] != '*':
         x = random.randint(0,2)
@@ -88,8 +105,11 @@ def mark_robot(a, mark):
     a[x, y] = mark
     print('Mark plays random [', x, ',', y, ']')
  
-    return a   
+    return a
 
+
+## ********************* Beginning *****************************
+## Beginning 
 a = np.full([3, 3], "*", dtype=np.object)
 #output(a)
 
@@ -101,10 +121,12 @@ start = input('Who starts? PHILIP or MARK: (p/m)')
 if start.lower() == 'm':
     mark_mark=1 # отметка Марка
     philip_mark=0 # отметка Филиппа
-    a = mark_robot(a, mark_mark) 
+    a = mark_robot(a, mark_mark)
+    players = {1: 'Mark', 0: 'Philip'}
 else:
     mark_mark=0
     philip_mark=1
+    players = {0: 'Mark', 1: 'Philip'}
 #a[0,0]= mark
 output(a) 
 
