@@ -41,8 +41,19 @@ def philip_robot(a, mark):
                 print ('Philip played smart move for column')
                 return a
  
-            
+    #проверка диагоналей
+    diagonalCounter = 0
+    for  u in range(a.shape[1]):       
+        if a[u,u] == mark:
+            diagonalCounter += 1
+    if diagonalCounter == 2:
+        for  u in range(a.shape[1]):       
+            if a[u,u] == "*":
+                a [u,u]= mark
+                print ('Philip played smart move for diagonal')
+                return a
 
+            
     # random move
     c = random.randint(0,2)
     d = random.randint(0,2)
@@ -86,6 +97,20 @@ def mark_robot(a, mark):
                 a[j][i] = mark
                 print ('Mark played smart move for column')
                 return a
+
+        #проверка диагоналей
+    diagonalCounter = 0
+    for  u in range(a.shape[1]):       
+        if a[u,u] == mark:
+            diagonalCounter += 1
+    if diagonalCounter == 2:
+        for  u in range(a.shape[1]):       
+            if a[u,u] == "*":
+                a [u,u]= mark
+                print ('Mark played smart move for diagonal')
+                return a
+
+
           
     
 ##    for i in range(len(a)):
@@ -123,6 +148,7 @@ if start.lower() == 'm':
     philip_mark=0 # отметка Филиппа
     a = mark_robot(a, mark_mark)
     players = {1: 'Mark', 0: 'Philip'}
+    
 else:
     mark_mark=0
     philip_mark=1
@@ -133,21 +159,23 @@ output(a)
 print('Филипп ставит:', philip_mark )
 print('Марк ставит:', mark_mark )
 print('===============================')
-#exit()   
+#exit()
+
 result = None
 for x in range(100):
     a = philip_robot(a, philip_mark)
     winner = check.check_if_solved(a)
     if winner != None:
-        print ('winner:', winner)
+        print ('winner:', players[winner],"*_*")
         break
     a = mark_robot(a, mark_mark)
     winner = check.check_if_solved(a)
     if winner != None:
-        print ('The winner:', winner)
+        print ('The winner:',players[winner],"*_*")
         break
     output(a)
     print('===============================')
 print('Final array:')
 output(a)
-#print ('winner:', check.check_if_solved(a))
+#print ('winner:', check.check_if_solved(aprint(players[]
+
