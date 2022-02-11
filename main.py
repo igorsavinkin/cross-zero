@@ -52,6 +52,44 @@ def philip_robot(a, mark):
                 a [u,u]= mark
                 print ('Philip played smart move for diagonal')
                 return a
+    ######################## BLOCKAGE ##########################
+    # блокировка соперника
+    # in row
+    for i in range(a.shape[1]):
+        b = a[i]
+        rowCounter = 0 
+        for j in range(len(b)):
+            if b[j] == opposite_mark:
+                 rowCounter += 1 
+        for j in range(len(b)):
+            if rowCounter == 2 and b[j] == "*": 
+                b[j] = mark
+                print('Philip blocked other player with a smart move for row: [', i,',', j, ']')
+                return a
+    # in column
+    for i in range(a.shape[1]):
+        #print('столбец:', i, ': ' , a[:, i])
+        # a[:, i] 
+        columnCouter = 0
+        for elem in a[:, i]:
+            if elem == opposite_mark:
+                columnCouter += 1
+        for j in range(a.shape[0]):
+            if columnCouter == 2 and a[j][i] =="*":
+                a[j][i] = mark
+                print ('Philip blocked other player with a smart move for column: [', j,',', i, ']')
+                return a
+    # in the main diagonal 
+    diagonalCounter = 0
+    for  u in range(a.shape[1]):       
+        if a[u,u] == opposite_mark :
+            diagonalCounter += 1
+    if diagonalCounter == 2:
+        for  u in range(a.shape[1]):       
+            if a[u,u] == "*":
+                a [u,u]= mark
+                print ('Philip blocked other player with a smart move for diagonal:  [', u,',', u, ']')
+                return a
 
             
     # random move
@@ -70,16 +108,16 @@ def mark_robot(a, mark):
     opposite_mark = abs(mark - 1)
 
     # smart move check for horisontal move
-    for i in range(len(a)):
+    for i in range(a.shape[1]):
         b = a[i]
         rowCounter = 0 
         for j in range(len(b)):
-            if b[j]==mark:
+            if b[j] == mark:
                  rowCounter += 1 
         for j in range(len(b)):
             if rowCounter == 2 and b[j] == "*": 
                 b[j] = mark
-                print('Mark plays smart move for row: [', i, ', ', j, ']')
+                print('Mark plays smart move for row: [', i,',', j, ']')
                 return a
 
         #  smart move check for vertical move/winp
@@ -110,6 +148,47 @@ def mark_robot(a, mark):
                 print ('Mark played smart move for diagonal')
                 return a
 
+            
+ ######################## BLOCKAGE ##########################
+    # блокировка соперника
+    # in row
+    for i in range(a.shape[1]):
+        b = a[i]
+        rowCounter = 0 
+        for j in range(len(b)):
+            if b[j] == opposite_mark:
+                 rowCounter += 1 
+        for j in range(len(b)):
+            if rowCounter == 2 and b[j] == "*": 
+                b[j] = mark
+                print('Mark blocked other player with a smart move for row: [', i,',', j, ']')
+                return a
+    # in column
+    for i in range(a.shape[1]):
+        #print('столбец:', i, ': ' , a[:, i])
+        # a[:, i] 
+        columnCouter = 0
+        for elem in a[:, i]:
+            if elem == opposite_mark:
+                columnCouter += 1
+        for j in range(a.shape[0]):
+            if columnCouter == 2 and a[j][i] =="*":
+                a[j][i] = mark
+                print ('Mark blocked other player with a smart move for column: [', j,',', i, ']')
+                return a
+    # in the main diagonal 
+    diagonalCounter = 0
+    for  u in range(a.shape[1]):       
+        if a[u,u] == opposite_mark :
+            diagonalCounter += 1
+    if diagonalCounter == 2:
+        for  u in range(a.shape[1]):       
+            if a[u,u] == "*":
+                a [u,u]= mark
+                print ('Mark blocked other player with a smart move for diagonal:  [', u,',', u, ']')
+                return a
+    
+
 
           
     
@@ -132,7 +211,18 @@ def mark_robot(a, mark):
  
     return a
 
+def check_if_end(a):
+    for i in range(a.shape[0]):
+        for j in range(a.shape[1]):
+            if a[i,j] == "*":
+                return False
+    return True 
+                
+            
+        
+        
 
+    
 ## ********************* Beginning *****************************
 ## Beginning 
 a = np.full([3, 3], "*", dtype=np.object)
@@ -166,15 +256,24 @@ for x in range(100):
     a = philip_robot(a, philip_mark)
     winner = check.check_if_solved(a)
     if winner != None:
-        print ('winner:', players[winner],"*_*")
+        print ('The winner:', players[winner],"*_*")
         break
+    output(a)
+    if check_if_end(a):
+        print ('The draw, no more moves to do.')
+        exit()
+    
     a = mark_robot(a, mark_mark)
     winner = check.check_if_solved(a)
     if winner != None:
         print ('The winner:',players[winner],"*_*")
         break
     output(a)
+    if check_if_end(a):
+        print ('The draw, no more moves to do.')
+        exit()
     print('===============================')
+    
 print('Final array:')
 output(a)
 #print ('winner:', check.check_if_solved(aprint(players[]
