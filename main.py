@@ -6,6 +6,10 @@ from output_arr import output
 def philip_robot(a, mark):
     
     opposite_mark = abs(mark - 1)
+    if a[1,1] == '*':
+        a[1,1] = mark
+        print('Philip puts smart move in the field center')                
+        return a
 ##    for s in range(len(a)):
 ##        for f in range(len(a[s])):
 ##            if a[s,f] == mark:
@@ -90,7 +94,25 @@ def philip_robot(a, mark):
                 a [u,u]= mark
                 print ('Philip blocked other player with a smart move for diagonal:  [', u,',', u, ']')
                 return a
+    if a[0,0] == '*':
+        a[0,0] = mark
+        print('Philip puts smart move in the field corner')                
+        return a
+    
+    if a[0,2] == '*':
+        a[0,2] = mark
+        print('Philip puts smart move in the field corner')                
+        return a
 
+    if a[2,2] == '*':
+        a[2,2] = mark
+        print('Philip puts smart move in the field corner')                
+        return a
+
+    if a[2,0] == '*':
+        a[2,0] = mark
+        print('Philip puts smart move in the field corner')                
+        return a
             
     # random move
     c = random.randint(0,2)
@@ -106,7 +128,14 @@ def philip_robot(a, mark):
         
 def mark_robot(a, mark):
     opposite_mark = abs(mark - 1)
-
+    # put in the center if vacant
+    if a[1,1] == '*':
+        a[1,1] = mark
+        print('Mark puts smart move in the field center')                
+        return a
+        
+    
+    
     # smart move check for horisontal move
     for i in range(a.shape[1]):
         b = a[i]
@@ -187,7 +216,26 @@ def mark_robot(a, mark):
                 a [u,u]= mark
                 print ('Mark blocked other player with a smart move for diagonal:  [', u,',', u, ']')
                 return a
+
+    if a[0,0] == '*':
+        a[0,0] = mark
+        print('Mark puts smart move in the field corner')                
+        return a
     
+    if a[0,2] == '*':
+        a[0,2] = mark
+        print('Mark puts smart move in the field corner')                
+        return a
+
+    if a[2,2] == '*':
+        a[2,2] = mark
+        print('Mark puts smart move in the field corner')                
+        return a
+
+    if a[2,0] == '*':
+        a[2,0] = mark
+        print('Mark puts smart move in the field corner')                
+        return a
 
 
           
@@ -229,28 +277,29 @@ a = np.full([3, 3], "*", dtype=np.object)
 #output(a)
 
 print ("================================================")
-print ("Initial array:")
-output(a) 
+#print ("Initial array:")
+#output(a) 
 start = input('Who starts? PHILIP or MARK: (p/m)')
 
 if start.lower() == 'm':
     mark_mark=1 # отметка Марка
     philip_mark=0 # отметка Филиппа
+    print('Филипп играет за ', philip_mark )
+    print('Марк играет за ', mark_mark )
+    print('===============================')
     a = mark_robot(a, mark_mark)
     players = {1: 'Mark', 0: 'Philip'}
+    output(a) 
+    print('===============================')
     
 else:
     mark_mark=0
     philip_mark=1
+    print('Филипп играет за ', philip_mark )
+    print('Марк играет за ', mark_mark )
+    print('===============================')
     players = {0: 'Mark', 1: 'Philip'}
-#a[0,0]= mark
-output(a) 
-
-print('Филипп ставит:', philip_mark )
-print('Марк ставит:', mark_mark )
-print('===============================')
-#exit()
-
+ 
 result = None
 for x in range(100):
     a = philip_robot(a, philip_mark)
