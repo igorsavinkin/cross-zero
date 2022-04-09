@@ -1,7 +1,7 @@
 import numpy as np
 
 #table = np.array([[0, 0, 1],
-#                 [1, 1, 0],
+#                  [1, 1, 0],
 #                  [1, 1, 0]])
 #print(table) 
 

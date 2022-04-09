@@ -94,6 +94,19 @@ def philip_robot(a, mark):
                 a [u,u]= mark
                 print ('Philip blocked other player with a smart move for diagonal:  [', u,',', u, ']')
                 return a
+    diagonalCounter =0       
+    for  i in range(a.shape[0]):       
+        for  u in range(a.shape[1]):       
+            if u+i == 2 and a[i,u] == opposite_mark :
+                diagonalCounter += 1
+
+    if diagonalCounter == 2:
+        for  i in range(a.shape[0]):       
+            for  u in range(a.shape[1]):       
+                if u+i==2 and a[i,u]=="*":
+                    a [i,u]= mark
+                    print ('Philip blocked other player with a smart move for diagonal:  [', i,',', u, ']')
+                    return a
     if a[0,0] == '*':
         a[0,0] = mark
         print('Philip puts smart move in the field corner')                
@@ -216,6 +229,19 @@ def mark_robot(a, mark):
                 a [u,u]= mark
                 print ('Mark blocked other player with a smart move for diagonal:  [', u,',', u, ']')
                 return a
+    diagonalCounter =0       
+    for  i in range(a.shape[0]):       
+        for  u in range(a.shape[1]):       
+            if u+i == 2 and a[i,u] == opposite_mark :
+                diagonalCounter += 1
+
+    if diagonalCounter == 2:
+        for  i in range(a.shape[0]):       
+            for  u in range(a.shape[1]):       
+                if u+i==2 and a[i,u]=="*":
+                    a [i,u]= mark
+                    print ('Philip blocked other player with a smart move for diagonal:  [', i,',', u, ']')
+                    return a
 
     if a[0,0] == '*':
         a[0,0] = mark
@@ -326,4 +352,3 @@ for x in range(100):
 print('Final array:')
 output(a)
 #print ('winner:', check.check_if_solved(aprint(players[]
-
